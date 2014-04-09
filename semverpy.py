@@ -51,15 +51,17 @@ class SemVerPy():
         if not isinstance(other, SemVerPy):
             return False
         for s, o in zip(self._tuple(), other._tuple()):
-            if s < o:
-                return True
+            if s > o:
+                return False
+        return True
 
     def __gt__(self, other):
         if not isinstance(other, SemVerPy):
             return False
         for s, o in zip(self._tuple(), other._tuple()):
-            if s > o:
-                return True
+            if s < o:
+                return False
+        return True
 
     def __le__(self, other):
         return self == other or self < other
