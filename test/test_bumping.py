@@ -14,3 +14,10 @@ def test_bump():
     assert current == v1_1
     current.bump_major()
     assert current == v2
+
+
+def test_build_bumping():
+    current = SemVerPy('1.0.0')
+    v2 = SemVerPy('2.0.0-name')
+    current.bump_major(build='name')
+    assert current == v2
