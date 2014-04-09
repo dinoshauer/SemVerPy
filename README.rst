@@ -18,6 +18,10 @@ It also supports comparisons:
 
     >>> v1 == SemVerPy('1.1.0')
     True
+    >>> v1 > SemVerPy('1.0.0')
+    True
+    >>> v1 > SemVerPy('2.0.0')
+    False
 
 When you bump a version, all the smaller version numbers are set to zeroes.
 
