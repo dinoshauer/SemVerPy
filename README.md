@@ -1,0 +1,4 @@
+SemVerPy
+========
+
+Bumping versions. Semantically.
