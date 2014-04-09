@@ -13,12 +13,25 @@ class InvalidVersionException(Exception):
 class SemVerPy():
     def __init__(self, version):
         self.pattern = r'(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)'
-        self.version = self._validate(version)
+        version = self._validate(version)
+        self.major = version['major']
+        self.minor = version['minor']
+        self.patch = version['patch']
+        self.build = version['build']
 
     def __str__(self):
         if self.version['build'] is not None:
-            return '{major}.{minor}.{patch}-{build}'.format(**self.version)
-        return '{major}.{minor}.{patch}'.format(**self.version)
+            return '{major}.{minor}.{patch}-{build}'.format(
+                self.major,
+                self.minor,
+                self.patch,
+                self.build,
+            )
+        return '{major}.{minor}.{patch}'.format(
+            self.major,
+            self.minor,
+            self.patch,
+        )
 
     def __repr__(self):
         return '<{}({})>'.format(
