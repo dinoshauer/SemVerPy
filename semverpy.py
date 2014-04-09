@@ -90,10 +90,13 @@ class SemVerPy():
 
     def bump_major(self):
         self.version['major'] = self.version['major'] + 1
+        self.version['minor'] = 0
+        self.version['patch'] = 0
         return self.version
 
     def bump_minor(self):
         self.version['minor'] = self.version['minor'] + 1
+        self.version['patch'] = 0
         return self.version
 
     def bump_patch(self):
