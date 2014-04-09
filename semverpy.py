@@ -50,18 +50,16 @@ class SemVerPy():
     def __lt__(self, other):
         if not isinstance(other, SemVerPy):
             return False
-        for s, o in zip(self._tuple(), other._tuple()):
-            if s > o:
-                return False
-        return True
+
+        version_numbers = zip(self._tuple(), other._tuple())
+        return any([s < o for s, o in version_numbers])
 
     def __gt__(self, other):
         if not isinstance(other, SemVerPy):
             return False
-        for s, o in zip(self._tuple(), other._tuple()):
-            if s < o:
-                return False
-        return True
+
+        version_numbers = zip(self._tuple(), other._tuple())
+        return any([s > o for s, o in version_numbers])
 
     def __le__(self, other):
         return self == other or self < other
