@@ -1,5 +1,5 @@
 from setuptools import setup
-from semver import __version__, __author__, __license__
+from semverpy import __version__, __author__, __license__
 
 setup(name='SemVerPy',
     description='Bump versions. Semantically.',
