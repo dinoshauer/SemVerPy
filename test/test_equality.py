@@ -37,3 +37,10 @@ def test_greater_equal():
     v1 = SemVerPy('0.0.1-a')
     v2 = SemVerPy('0.0.3-a')
     assert v2 >= v1
+
+
+def test_fails():
+    v1 = SemVerPy('0.0.1-a')
+    v2 = SemVerPy('0.0.1-a')
+    assert not v2 > v1
+    assert not v2 < v1
