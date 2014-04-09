@@ -11,8 +11,18 @@ Usage is pretty simple:
     >>> v1 = SemVerPy('1.0.0')
     >>> v1.bump_minor()
     {'major': 1, 'build': None, 'minor': 1, 'patch': 0}
+
+It also supports comparisons:
+
+.. code-block:: python
+
     >>> v1 == SemVerPy('1.1.0')
     True
+
+When you bump a version, all the smaller version numbers are set to zeroes.
+
+.. code-block:: python
+
     >>> v1.bump_major()
     {'major': 2, 'build': None, 'minor': 0, 'patch': 0}
     >>> str(v1)
