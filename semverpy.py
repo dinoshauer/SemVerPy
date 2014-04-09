@@ -88,19 +88,22 @@ class SemVerPy():
         except AttributeError:
             raise InvalidVersionException('Not a valid version: {}'.format(string))
 
-    def bump_major(self):
+    def bump_major(self, build=None):
         self.version['major'] = self.version['major'] + 1
         self.version['minor'] = 0
         self.version['patch'] = 0
+        self.version['build'] = build
         return self.version
 
-    def bump_minor(self):
+    def bump_minor(self, build=None):
         self.version['minor'] = self.version['minor'] + 1
         self.version['patch'] = 0
+        self.version['build'] = build
         return self.version
 
-    def bump_patch(self):
+    def bump_patch(self, build=None):
         self.version['patch'] = self.version['patch'] + 1
+        self.version['build'] = build
         return self.version
 
     def set_build(self, build_string):
