@@ -1,5 +1,10 @@
 import re
 
+__version__ = '0.0.1'
+__author__ = 'Kasper Jacobsen'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014 Kasper Jacobsen'
+
 class InvalidVersionException(Exception):
 	pass
 
