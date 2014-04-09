@@ -31,3 +31,12 @@ When you bump a version, all the smaller version numbers are set to zeroes.
     {'major': 2, 'build': None, 'minor': 0, 'patch': 0}
     >>> str(v1)
     '2.0.0'
+
+You can also define a build number when bumping a version:
+
+.. code-block:: python
+
+    >>> v1.bump_minor('buildinfo')
+    {'major': 2, 'build': 'buildinfo', 'minor': 1, 'patch': 0}
+    >>> str(v1)
+    '2.1.0-buildinfo'
