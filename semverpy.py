@@ -30,6 +30,43 @@ class SemVerPy():
         self.version[key] = value
         return self.version
 
+    def _tuple(self):
+        major = self.version['major']
+        minor = self.version['minor']
+        patch = self.version['patch']
+        build = self.version['build']
+
+        return major, minor, patch, build
+
+    def __eq__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        else:
+            return self._tuple() == other._tuple()
+
+    def __ne__(self, other):
+        return not self == other
+
+    def __lt__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        for s, o in zip(self._tuple(), other._tuple()):
+            if s < o:
+                return True
+
+    def __gt__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        for s, o in zip(self._tuple(), other._tuple()):
+            if s > o:
+                return True
+
+    def __le__(self, other):
+        return self == other or self < other
+
+    def __ge__(self, other):
+        return self == other or self > other
+
     def _get_dict(self, string):
         return re.search(self.pattern, string).groupdict()
 
