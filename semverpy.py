@@ -14,28 +14,28 @@ class SemVerPy():
     def __init__(self, version):
         self.pattern = r'(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)'
         version = self._validate(version)
-        self.major = version['major']
-        self.minor = version['minor']
-        self.patch = version['patch']
-        self.build = version['build']
+        self._major = version['major']
+        self._minor = version['minor']
+        self._patch = version['patch']
+        self._build = version['build']
 
     def __str__(self):
         if self.version['build'] is not None:
             return '{major}.{minor}.{patch}-{build}'.format(
-                self.major,
-                self.minor,
-                self.patch,
-                self.build,
+                self._major,
+                self._minor,
+                self._patch,
+                self._build,
             )
         return '{major}.{minor}.{patch}'.format(
-            self.major,
-            self.minor,
-            self.patch,
+            self._major,
+            self._minor,
+            self._patch,
         )
 
     def __repr__(self):
         return '<{}({})>'.format(
-            self.__class__.__name__, str(self.version)
+            self.__class__.__name__, str(self)
         )
 
     def __getitem__(self, key):
@@ -102,21 +102,21 @@ class SemVerPy():
             raise InvalidVersionException('Not a valid version: {}'.format(string))
 
     def bump_major(self, build=None):
-        self.version['major'] = self.version['major'] + 1
-        self.version['minor'] = 0
-        self.version['patch'] = 0
-        self.version['build'] = build
+        self._major += 1
+        self._minor = 0
+        self._patch = 0
+        self._build = build
         return self.version
 
     def bump_minor(self, build=None):
-        self.version['minor'] = self.version['minor'] + 1
-        self.version['patch'] = 0
-        self.version['build'] = build
+        self._minor += 1
+        self._patch = 0
+        self._build = build
         return self.version
 
     def bump_patch(self, build=None):
-        self.version['patch'] = self.version['patch'] + 1
-        self.version['build'] = build
+        self._patch += 1
+        self._build = build
         return self.version
 
     def set_build(self, build_string):
