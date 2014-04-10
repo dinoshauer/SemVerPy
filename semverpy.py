@@ -20,7 +20,7 @@ class SemVerPy():
         self._build = version['build']
 
     def __str__(self):
-        if self.version['build'] is not None:
+        if self._build is not None:
             return '{major}.{minor}.{patch}-{build}'.format(
                 major=self._major,
                 minor=self._minor,
@@ -38,18 +38,11 @@ class SemVerPy():
             self.__class__.__name__, str(self)
         )
 
-    def __getitem__(self, key):
-        return self.version[key]
-
-    def __setitem__(self, key, value):
-        self.version[key] = value
-        return self.version
-
     def _tuple(self):
-        major = self.version['major']
-        minor = self.version['minor']
-        patch = self.version['patch']
-        build = self.version['build']
+        major = self._major
+        minor = self._minor
+        patch = self._patch
+        build = self._build
 
         return major, minor, patch, build
 
@@ -106,19 +99,19 @@ class SemVerPy():
         self._minor = 0
         self._patch = 0
         self._build = build
-        return self.version
+        return self
 
     def bump_minor(self, build=None):
         self._minor += 1
         self._patch = 0
         self._build = build
-        return self.version
+        return self
 
     def bump_patch(self, build=None):
         self._patch += 1
         self._build = build
-        return self.version
+        return self
 
     def set_build(self, build_string):
-        self.version['build'] = build_string
-        return self.version
+        self._build = build_string
+        return self
