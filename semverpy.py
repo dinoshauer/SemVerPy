@@ -20,18 +20,15 @@ class SemVerPy():
         self._build = version['build']
 
     def __str__(self):
-        if self._build:
-            return '{major}.{minor}.{patch}-{build}'.format(
-                major=self._major,
-                minor=self._minor,
-                patch=self._patch,
-                build=self._build,
-            )
-        return '{major}.{minor}.{patch}'.format(
+        res = '{major}.{minor}.{patch}'.format(
             major=self._major,
             minor=self._minor,
             patch=self._patch,
         )
+
+        if self._build:
+            res += '-{}'.format(self._build)
+        return res
 
     def __repr__(self):
         return '<{}({})>'.format(
