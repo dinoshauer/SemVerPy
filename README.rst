@@ -11,6 +11,8 @@ Usage is pretty simple:
     >>> version = SemVerPy('1.0.0')
     >>> version.bump_minor()
     {'major': 1, 'build': None, 'minor': 1, 'patch': 0}
+    >>> str(version)
+    '1.1.0'
 
 It also supports comparisons:
 
