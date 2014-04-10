@@ -1,0 +1,6 @@
+[run]
+source = api,app,jobs
+[report]
+omit =
+    */python?.?/*
+    */site-packages/*
