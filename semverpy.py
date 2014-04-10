@@ -39,12 +39,7 @@ class SemVerPy():
         )
 
     def _tuple(self):
-        major = self._major
-        minor = self._minor
-        patch = self._patch
-        build = self._build
-
-        return major, minor, patch, build
+        return self._major, self._minor, self._patch, self._build
 
     def __eq__(self, other):
         if not isinstance(other, SemVerPy):
