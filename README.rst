@@ -10,7 +10,7 @@ Usage is pretty simple:
     >>> from semverpy import SemVerPy
     >>> version = SemVerPy('1.0.0')
     >>> version.bump_minor()
-    {'major': 1, 'build': None, 'minor': 1, 'patch': 0}
+    <SemVerPy(1.1.0)>
     >>> str(version)
     '1.1.0'
 
@@ -30,7 +30,7 @@ When you bump a version, all the smaller version numbers are set to zeroes.
 .. code-block:: python
 
     >>> version.bump_major()
-    {'major': 2, 'build': None, 'minor': 0, 'patch': 0}
+    <SemVerPy(2.0.0)>
     >>> str(version)
     '2.0.0'
 
@@ -39,6 +39,6 @@ You can also define a build number when bumping a version:
 .. code-block:: python
 
     >>> version.bump_minor('buildinfo')
-    {'major': 2, 'build': 'buildinfo', 'minor': 1, 'patch': 0}
+    <SemVerPy(2.1.0-buildinfo)>
     >>> str(version)
     '2.1.0-buildinfo'
