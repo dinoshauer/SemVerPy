@@ -1,7 +1,8 @@
 from setuptools import setup
 from semverpy import __version__, __author__, __license__
 
-setup(name='SemVerPy',
+setup(
+    name='SemVerPy',
     description='Bump versions. Semantically.',
     version=__version__,
     author=__author__,

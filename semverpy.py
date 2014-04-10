@@ -5,8 +5,10 @@ __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
+
 class InvalidVersionException(Exception):
     pass
+
 
 class SemVerPy():
     def __init__(self, version):
