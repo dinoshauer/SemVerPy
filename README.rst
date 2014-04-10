@@ -1,6 +1,6 @@
 .. image:: https://travis-ci.org/Dinoshauer/SemVerPy.svg?branch=master :target: https://travis-ci.org/Dinoshauer/SemVerPy
-.. image:: https://gemnasium.com/Dinoshauer/SemVerPy.svg :target: https://gemnasium.com/Dinoshauer/SemVerPy
-.. image:: https://coveralls.io/repos/Dinoshauer/SemVerPy/badge.png :target: https://coveralls.io/r/Dinoshauer/SemVerPy
+.. image:: https://gemnasium.com/Dinoshauer/SemVerPy.svg?branch=master :target: https://gemnasium.com/Dinoshauer/SemVerPy
+.. image:: https://coveralls.io/repos/Dinoshauer/SemVerPy/badge.png?branch=master :target: https://coveralls.io/r/Dinoshauer/SemVerPy
 
 SemVerPy
 ========
