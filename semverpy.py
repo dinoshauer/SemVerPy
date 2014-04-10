@@ -22,15 +22,15 @@ class SemVerPy():
     def __str__(self):
         if self.version['build'] is not None:
             return '{major}.{minor}.{patch}-{build}'.format(
-                self._major,
-                self._minor,
-                self._patch,
-                self._build,
+                major=self._major,
+                minor=self._minor,
+                patch=self._patch,
+                build=self._build,
             )
         return '{major}.{minor}.{patch}'.format(
-            self._major,
-            self._minor,
-            self._patch,
+            major=self._major,
+            minor=self._minor,
+            patch=self._patch,
         )
 
     def __repr__(self):
