@@ -20,7 +20,7 @@ class SemVerPy():
         self._build = version['build']
 
     def __str__(self):
-        if self._build is not None:
+        if self._build:
             return '{major}.{minor}.{patch}-{build}'.format(
                 major=self._major,
                 minor=self._minor,
