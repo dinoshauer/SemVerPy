@@ -32,6 +32,41 @@ class SemVerPy():
         self.version[key] = value
         return self.version
 
+    def _tuple(self):
+        major = self.version['major']
+        minor = self.version['minor']
+        patch = self.version['patch']
+        build = self.version['build']
+
+        return major, minor, patch, build
+
+    def __eq__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        else:
+            return self._tuple() == other._tuple()
+
+    def __ne__(self, other):
+        return not self == other
+
+    def __lt__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        else:
+            return self._tuple() < other._tuple()
+
+    def __gt__(self, other):
+        if not isinstance(other, SemVerPy):
+            return False
+        else:
+            return self._tuple() > other._tuple()
+
+    def __le__(self, other):
+        return self._tuple() <= other._tuple()
+
+    def __ge__(self, other):
+        return self._tuple() >= other._tuple()
+
     def _get_dict(self, string):
         return re.search(self.pattern, string).groupdict()
 
@@ -53,16 +88,22 @@ class SemVerPy():
         except AttributeError:
             raise InvalidVersionException('Not a valid version: {}'.format(string))
 
-    def bump_major(self):
+    def bump_major(self, build=None):
         self.version['major'] = self.version['major'] + 1
+        self.version['minor'] = 0
+        self.version['patch'] = 0
+        self.version['build'] = build
         return self.version
 
-    def bump_minor(self):
+    def bump_minor(self, build=None):
         self.version['minor'] = self.version['minor'] + 1
+        self.version['patch'] = 0
+        self.version['build'] = build
         return self.version
 
-    def bump_patch(self):
+    def bump_patch(self, build=None):
         self.version['patch'] = self.version['patch'] + 1
+        self.version['build'] = build
         return self.version
 
     def set_build(self, build_string):
