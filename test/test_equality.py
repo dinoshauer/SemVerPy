@@ -44,3 +44,9 @@ def test_fails():
     v2 = SemVerPy('0.0.1-a')
     assert not v2 > v1
     assert not v2 < v1
+
+    v1 = SemVerPy('1.1.0')
+    v2 = SemVerPy('2.0.0')
+    assert v1 != v2
+    assert not v1 > v2
+    assert v1 < v2
