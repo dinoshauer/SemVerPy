@@ -13,7 +13,6 @@ _build = r'(?:[:+-](?P<build>\w+))?'
 _end = r'$'
 
 _regex = _start + _major + _minor + _patch + _build + _end
-# _regex = r'^v?(?P<major>\d+)(\.(?P<minor>\d+))?(\.(?P<patch>\d+))?(?:[:+-](?P<build>\w+))?$'
 
 
 class InvalidVersionException(Exception):
