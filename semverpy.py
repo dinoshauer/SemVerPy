@@ -5,14 +5,17 @@ __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
+_regex = r'^v?(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)$'
+
 
 class InvalidVersionException(Exception):
     pass
 
 
 class SemVerPy():
+    _pattern = re.compile(_regex, re.IGNORECASE)
+
     def __init__(self, version):
-        self.pattern = r'(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)'
         version = self._validate(version)
         self._major = version['major']
         self._minor = version['minor']
@@ -66,7 +69,7 @@ class SemVerPy():
         return self._tuple() >= other._tuple()
 
     def _get_dict(self, string):
-        return re.search(self.pattern, string).groupdict()
+        return self._pattern.search(string).groupdict()
 
     @staticmethod
     def _parse_dict(version_dict):
