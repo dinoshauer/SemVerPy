@@ -26,3 +26,7 @@ def test_invalid_build():
 @raises(InvalidVersionException)
 def test_invalid_separators():
     SemVerPy('1-0-0')
+
+
+def test_partial_version():
+    SemVerPy('1.1')
