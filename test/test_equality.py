@@ -55,4 +55,5 @@ def test_fails():
 def test_dependency_matches():
     dependency = SemVerPy('2.3')
     version = SemVerPy('2.3.5-finalfinallast')
-    dependency == version
+    assert dependency == version
+    assert version != dependency
