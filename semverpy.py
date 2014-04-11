@@ -5,7 +5,7 @@ __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
-_start = r'^v?'
+_start = r'^[v=]?'
 _major = r'(?P<major>\d+)'
 _minor = r'(\.(?P<minor>\d+))?'
 _patch = r'(\.(?P<patch>\d+))?'
