@@ -18,3 +18,8 @@ def test_regex():
 @raises(InvalidVersionException)
 def test_invalid_build():
     SemVerPy('v1.0.0-build info')
+
+
+@raises(InvalidVersionException)
+def test_invalid_separators():
+    SemVerPy('1-0-0')
