@@ -42,27 +42,28 @@ class SemVerPy():
         return res
 
     def __repr__(self):
-        return '<{}({})>'.format(
-            self.__class__.__name__, str(self)
+        return '<{name}({info})>'.format(
+            name=self.__class__.__name__,
+            info=str(self),
         )
 
     def _tuple(self):
         return self._major, self._minor, self._patch, self._build
 
-    # def __contains__(self, item):
-    #     return False
+    def satisfies(self, item):
+        for s, o in zip(self._tuple(), item._tuple()):
+            if o is not None and s != o:
+                return False
+        return True
 
     def __eq__(self, other):
         if not isinstance(other, SemVerPy):
             return False
         else:
-            for s, o in zip(self._tuple(), other._tuple()):
-                if s is not None and s != o:
-                    return False
-            return True
+            return self._tuple() == other._tuple()
 
     def __ne__(self, other):
-        return not self == other
+        return self._tuple() != other._tuple()
 
     def __lt__(self, other):
         if not isinstance(other, SemVerPy):
@@ -97,7 +98,6 @@ class SemVerPy():
         for key in ['major', 'minor', 'patch']:
             try:
                 version_dict[key] = int(version_dict[key])
-                print(version_dict)
             except TypeError:
                 pass
         return version_dict
