@@ -14,6 +14,9 @@ def test_regex():
     SemVerPy('v1.0.0-build')
     SemVerPy('V1.0.0-build')
 
+    SemVerPy('v1.0.0+build')
+    SemVerPy('v1.0.0:build')
+
 
 @raises(InvalidVersionException)
 def test_invalid_build():
