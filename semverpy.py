@@ -5,7 +5,7 @@ __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
-_regex = r'^v?(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)$'
+_regex = r'^v?(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(?:-(?P<build>\w*)|)$'
 
 
 class InvalidVersionException(Exception):
