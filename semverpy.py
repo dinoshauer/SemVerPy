@@ -5,15 +5,25 @@ __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
+_start = r'^[v=]?'
+_major = r'(?P<major>\d+)'
+_minor = r'(\.(?P<minor>\d+))?'
+_patch = r'(\.(?P<patch>\d+))?'
+_build = r'(?:[:+-](?P<build>\w+))?'
+_end = r'$'
+
+_regex = _start + _major + _minor + _patch + _build + _end
+
 
 class InvalidVersionException(Exception):
     pass
 
 
 class SemVerPy():
+    _pattern = re.compile(_regex, re.IGNORECASE)
+
     def __init__(self, version):
-        self.pattern = r'(?P<major>\d+).(?P<minor>\d+).(?P<patch>\d+)(?:-(?P<build>\w*)|)'
-        version = self._validate(version)
+        version = self._parse(version)
         self._major = version['major']
         self._minor = version['minor']
         self._patch = version['patch']
@@ -31,12 +41,19 @@ class SemVerPy():
         return res
 
     def __repr__(self):
-        return '<{}({})>'.format(
-            self.__class__.__name__, str(self)
+        return '<{name}({info})>'.format(
+            name=self.__class__.__name__,
+            info=str(self),
         )
 
     def _tuple(self):
         return self._major, self._minor, self._patch, self._build
+
+    def satisfies(self, item):
+        for s, o in zip(self._tuple(), item._tuple()):
+            if o is not None and s != o:
+                return False
+        return True
 
     def __eq__(self, other):
         if not isinstance(other, SemVerPy):
@@ -45,7 +62,7 @@ class SemVerPy():
             return self._tuple() == other._tuple()
 
     def __ne__(self, other):
-        return not self == other
+        return self._tuple() != other._tuple()
 
     def __lt__(self, other):
         if not isinstance(other, SemVerPy):
@@ -66,25 +83,23 @@ class SemVerPy():
         return self._tuple() >= other._tuple()
 
     def _get_dict(self, string):
-        return re.search(self.pattern, string).groupdict()
+        return self._pattern.search(string).groupdict()
 
-    @staticmethod
-    def _parse_dict(version_dict):
-        try:
-            version_dict['major'] = int(version_dict['major'])
-            version_dict['minor'] = int(version_dict['minor'])
-            version_dict['patch'] = int(version_dict['patch'])
-            return version_dict
-        except ValueError:
-            raise
+    def _parse(self, version_string):
+        res = self._pattern.search(version_string)
+        if res is None:
+            msg = 'Not a valid version: {}'.format(version_string)
+            raise InvalidVersionException(msg)
+        else:
+            return self._convert_fields(res.groupdict())
 
-    def _validate(self, string):
-        try:
-            version = self._get_dict(string)
-            version_dict = self._parse_dict(version)
-            return version_dict
-        except AttributeError:
-            raise InvalidVersionException('Not a valid version: {}'.format(string))
+    def _convert_fields(self, version_dict):
+        for key in ['major', 'minor', 'patch']:
+            try:
+                version_dict[key] = int(version_dict[key])
+            except TypeError:
+                pass
+        return version_dict
 
     def bump_major(self, build=None):
         self._major += 1

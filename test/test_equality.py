@@ -50,3 +50,13 @@ def test_fails():
     assert v1 != v2
     assert not v1 > v2
     assert v1 < v2
+
+
+def test_dependency_matches():
+    dependency = SemVerPy('2.3')
+    version = SemVerPy('2.3.5-finalfinallast')
+    assert version.satisfies(dependency)
+    assert version > dependency
+
+    other_dependency = SemVerPy('2.4')
+    assert not version.satisfies(other_dependency)
