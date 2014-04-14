@@ -46,12 +46,17 @@ class SemVerPy():
             info=str(self),
         )
 
-    def _tuple(self):
-        return self._major, self._minor, self._patch, self._build
+    def _tuple(self, fill=-1):
+        return (
+            self._major or fill,
+            self._minor or fill,
+            self._patch or fill,
+            self._build or fill,
+        )
 
     def satisfies(self, item):
         for s, o in zip(self._tuple(), item._tuple()):
-            if o is not None and s != o:
+            if o != -1 and s != o:
                 return False
         return True
 
