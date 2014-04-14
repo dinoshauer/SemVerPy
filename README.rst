@@ -46,3 +46,14 @@ You can also define a build number when bumping a version:
     <SemVerPy(2.1.0-buildinfo)>
     >>> str(version)
     '2.1.0-buildinfo'
+
+Lastly, if you define a partial version, which can be used as a dependency.
+
+.. code-block:: python
+
+    >>> version.satisfies(SemVerPy('2.0'))
+    False
+    >>> version.satisfies(SemVerPy('2.1'))
+    True
+    >>> version.satisfies(SemVerPy('2'))
+    True
