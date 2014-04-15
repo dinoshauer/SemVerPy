@@ -47,7 +47,7 @@ You can also define a build number when bumping a version:
     >>> str(version)
     '2.1.0-buildinfo'
 
-Lastly, if you define a partial version, which can be used as a dependency.
+Lastly, if you define a partial version, you can be used as a dependency.
 
 .. code-block:: python
 
