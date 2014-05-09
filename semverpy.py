@@ -1,6 +1,6 @@
 import re
 
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
@@ -25,8 +25,8 @@ class SemVerPy():
     def __init__(self, version):
         version = self._parse(version)
         self._major = version['major']
-        self._minor = version['minor']
-        self._patch = version['patch']
+        self._minor = version['minor'] or 0
+        self._patch = version['patch'] or 0
         self._build = version['build']
 
     def __str__(self):
