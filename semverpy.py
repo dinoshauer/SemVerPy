@@ -7,8 +7,8 @@ __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
 _start = r'^[v=]?'
 _major = r'(?P<major>\d+)'
-_minor = r'(\.(?P<minor>(\d+|x)))?'
-_patch = r'(\.(?P<patch>(\d+|x)))?'
+_minor = r'(\.(?P<minor>(\d+|[x*])))?'
+_patch = r'(\.(?P<patch>(\d+|[x*])))?'
 _build = r'(?:[:+-](?P<build>\w+))?'
 _end = r'$'
 
