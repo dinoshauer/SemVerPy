@@ -29,23 +29,11 @@ class SemVerPy():
         self._patch = version['patch']
         self._build = version['build']
 
-    def minor(self):
-        if type(self._minor) == int:
-            return self._minor
-        elif self._minor is None:
-            return 'x'
-
-    def patch(self):
-        if type(self._patch) == int:
-            return self._patch
-        elif self._patch is None:
-            return 'x'
-
     def __str__(self):
         res = '{major}.{minor}.{patch}'.format(
             major=self._major,
-            minor=self.minor(),
-            patch=self.patch(),
+            minor=self._minor if self._minor is not None else 'x',
+            patch=self._patch if self._patch is not None else 'x',
         )
 
         if self._build:
