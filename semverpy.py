@@ -26,15 +26,16 @@ class SemVerPy():
         version = self._parse(version)
         self.dependency = dependency
         if self.dependency:
-            self._major = version['major']
-            self._minor = version['minor']
-            self._patch = version['patch']
-            self._build = version['build']
+            fill = None
         else:
-            self._major = version['major']
-            self._minor = version['minor'] or 0
-            self._patch = version['patch'] or 0
-            self._build = version['build']
+            fill = 0
+
+        self._major = version['major']
+
+        self._minor = version['minor'] or fill
+        self._patch = version['patch'] or fill
+
+        self._build = version['build']
 
     def __str__(self):
         res = '{major}.{minor}.{patch}'.format(
