@@ -30,3 +30,7 @@ def test_invalid_separators():
 
 def test_partial_version():
     SemVerPy('1.1')
+
+
+def test_dependency():
+    SemVerPy('1.2.x', dependency=True)
