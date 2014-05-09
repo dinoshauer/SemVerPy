@@ -29,11 +29,23 @@ class SemVerPy():
         self._patch = version['patch']
         self._build = version['build']
 
+    def minor(self):
+        if type(self._minor) == int:
+            return self._minor
+        elif self._minor is None:
+            return 'x'
+
+    def patch(self):
+        if type(self._patch) == int:
+            return self._patch
+        elif self._patch is None:
+            return 'x'
+
     def __str__(self):
         res = '{major}.{minor}.{patch}'.format(
             major=self._major,
-            minor=self._minor,
-            patch=self._patch,
+            minor=self.minor(),
+            patch=self.patch(),
         )
 
         if self._build:
@@ -46,7 +58,7 @@ class SemVerPy():
             info=str(self),
         )
 
-    def _tuple(self, fill=-1):
+    def _tuple(self, fill=0):
         return (
             self._major or fill,
             self._minor or fill,
@@ -55,8 +67,8 @@ class SemVerPy():
         )
 
     def satisfies(self, item):
-        for s, o in zip(self._tuple(), item._tuple()):
-            if o != -1 and s != o:
+        for s, o in zip(self._tuple(fill='x'), item._tuple(fill='x')):
+            if o != 'x' and s != o:
                 return False
         return True
 
