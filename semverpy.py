@@ -1,14 +1,14 @@
 import re
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Kasper Jacobsen'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Kasper Jacobsen'
 
 _start = r'^[v=]?'
 _major = r'(?P<major>\d+)'
-_minor = r'(\.(?P<minor>\d+))?'
-_patch = r'(\.(?P<patch>\d+))?'
+_minor = r'(\.(?P<minor>(\d+|x)))?'
+_patch = r'(\.(?P<patch>(\d+|x)))?'
 _build = r'(?:[:+-](?P<build>\w+))?'
 _end = r'$'
 
@@ -23,7 +23,7 @@ class SemVerPy():
     _pattern = re.compile(_regex, re.IGNORECASE)
 
     def __init__(self, version, dependency=False):
-        version = self._parse(version)
+        version = self._parse(version, dependency)
         self.dependency = dependency
         if self.dependency:
             fill = None
@@ -98,20 +98,25 @@ class SemVerPy():
     def _get_dict(self, string):
         return self._pattern.search(string).groupdict()
 
-    def _parse(self, version_string):
+    def _parse(self, version_string, dependency):
         res = self._pattern.search(version_string)
         if res is None:
             msg = 'Not a valid version: {}'.format(version_string)
             raise InvalidVersionException(msg)
         else:
-            return self._convert_fields(res.groupdict())
+            return self._convert_fields(res.groupdict(), dependency)
 
-    def _convert_fields(self, version_dict):
+    def _convert_fields(self, version_dict, dependency):
         for key in ['major', 'minor', 'patch']:
-            try:
-                version_dict[key] = int(version_dict[key])
-            except TypeError:
-                pass
+            value = version_dict[key]
+            if dependency:
+                if value == 'x':
+                    version_dict[key] = None
+            else:
+                try:
+                    version_dict[key] = int(version_dict[key])
+                except TypeError:
+                    pass
         return version_dict
 
     def bump_major(self, build=None):
