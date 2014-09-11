@@ -47,15 +47,22 @@ You can also define a build number when bumping a version:
     >>> str(version)
     '2.1.0-buildinfo'
 
-Lastly, if you define a partial version, you can be used as a dependency.
+If you define a partial version, SemVerPy will fill the blanks with 0's as a shorthand for quick versions:
 
 .. code-block:: python
 
-    >>> version.satisfies(SemVerPy('2.0'))
+    >>> quick_version = SemVerPy('1')
+    <SemVerPy(1.0.0)>
+
+Of course, this is perhaps not always the intended behaviour, so you can also specify a dependency:
+
+.. code-block:: python
+
+    >>> version.satisfies(SemVerPy('2.0', dependency=True))
     False
-    >>> version.satisfies(SemVerPy('2.1'))
+    >>> version.satisfies(SemVerPy('2.1', dependency=True))
     True
-    >>> version.satisfies(SemVerPy('2'))
+    >>> version.satisfies(SemVerPy('2', dependency=True))
     True
-    >>> version == SemVerPy('2.1')
+    >>> version == SemVerPy('2.1', dependency=True)
     False
