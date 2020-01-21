@@ -1,4 +1,4 @@
-PyYAML==3.11
+PyYAML==5.1
 argcomplete==0.8.0
 argh==0.24.1
 cov-core==1.7
